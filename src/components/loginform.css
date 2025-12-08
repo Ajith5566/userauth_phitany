@@ -1,0 +1,86 @@
+
+/* Main card styling */
+.login-card {
+  width: 390px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 22px;
+  padding: 35px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Title styling */
+.login-title {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 8px;
+  color: #213555;
+}
+
+/* Subtitle small text */
+.login-subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #6d6d6d;
+  margin-bottom: 25px;
+}
+
+/* Nice input spacing */
+.login-input {
+  height: 45px;
+  border: 1px solid #c9d6ff;
+  transition: 0.2s;
+}
+
+/* Hover focus effect */
+.login-input:focus {
+  border-color: #6e8efb;
+  box-shadow: 0 0 6px rgba(110, 142, 251, 0.6);
+}
+
+/* Login button */
+.login-btn {
+  width: 100%;
+  background: linear-gradient(130deg, #6e8efb, #3f72ff);
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: 0.25s;
+}
+
+.login-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 22px rgba(63, 114, 255, 0.55);
+}
+
+/* Forgot password link */
+.forgot-link {
+  font-size: 13px;
+  text-decoration: none;
+  color: #3f72ff;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Signup text below */
+.signup-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.signup-text a {
+  font-weight: 600;
+  text-decoration: none;
+  color: #3f72ff;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
