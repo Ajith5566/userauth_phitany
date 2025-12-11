@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './RegistrationForm.css'
 import type { FormData, FormErrors } from "../types/form_type";
+import { registerApi } from '../service/allApi';
+import { AxiosError } from "axios";
 
 function Registration_form() {
 
@@ -76,31 +78,43 @@ function Registration_form() {
     };
 
     // On form submit
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault(); // To stop page refresh
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-        if (!validate()) return; // If invalid, stop submission
+  if (!validate()) return;
 
-        console.log("Form Data Submitted:", Data); // Log final values
+  try {
+    const result = await registerApi(Data);
+    console.log(result);
+    
 
-        // Reset form fields after successful submit
-        setData({
-            name: "",
-            mobile: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-        });
+    alert("Registration successful!");
 
-        // Reset error messages as well
-        setErrors({
-            name: "",
-            mobile: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-        });
-    };
+    setData({
+      name: "",
+      mobile: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
+
+    setErrors({
+      name: "",
+      mobile: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
+
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      alert(error.response?.data?.message || "Something went wrong");
+    } else {
+      alert("Unknown error occurred");
+    }
+  }
+};
+
 
     return (
         <>
@@ -179,7 +193,7 @@ function Registration_form() {
                             fontSize: "14px",
                         }}
                     >
-                        {showPassword ? "👁️" : "🙈"}
+                        {showPassword ? "🔓" : "🔒"}
                     </span>
                 </div>
 
@@ -213,7 +227,7 @@ function Registration_form() {
                             fontSize: "14px",
                         }}
                     >
-                        {showConfirmPassword ? "👁️" : "🙈"}
+                        {showConfirmPassword ? "🔓" : "🔒"}
                     </span>
                 </div>
 

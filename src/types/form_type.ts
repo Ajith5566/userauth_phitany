@@ -19,3 +19,9 @@ export interface Lform{
   email:string;
   password:string;
 }
+//login error
+export interface Lformerror {
+  email: string;
+  password: string;
+  
+}
