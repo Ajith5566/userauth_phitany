@@ -21,7 +21,7 @@ function Header() {
                     <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                         <ul className="navbar-nav gap-3">
                             <li className="nav-item">
-                                <a className="nav-link active" href="#">Register</a>
+                                <a className="nav-link active" href="/registration">Register</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/loginpage">Login</a>

@@ -25,3 +25,14 @@ export interface Lformerror {
   password: string;
   
 }
+export interface User {
+  _id: string;
+  username: string;
+  phoneNumber: string;
+  mailId: string;
+}
+
+export interface LoginResponse {
+  existingUser: User;
+  token: string;
+}

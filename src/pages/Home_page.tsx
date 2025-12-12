@@ -18,7 +18,7 @@ function Home_page() {
           }}
         >
           <h1 className="fw-bold mb-3" style={{ color: "#34495E" }}>
-            Welcome ✨
+            Welcome to ToDO App✨
           </h1>
 
           <p className="text-muted mb-4 fs-5">

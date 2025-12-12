@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Dashboard.css";
 
 function Dashboard() {
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const [newTask, setNewTask] = useState("");
+
+  const user = JSON.parse(sessionStorage.getItem("existingUser") || "{}");
+
+  useEffect(() => {
+    if (sessionStorage.getItem("token")) {
+      setIsLogin(true);
+    }
+  }, []);
+
+  const logout = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("existingUser");
+    setIsLogin(false);
+    navigate("/loginpage");
+  };
+
   const sampleTasks = [
     { id: 1, title: "Complete MERN Task", status: true },
     { id: 2, title: "Prepare Resume", status: false },
@@ -8,67 +29,79 @@ function Dashboard() {
   ];
 
   return (
-    <div className="container mt-5">
-      <h2 className="fw-bold text-center mb-4" style={{ color: "#374151" }}>
-        My To-Do List ✨
-      </h2>
-
-      <div className="row justify-content-center">
-        <div className="col-lg-6 col-md-8">
-          <div className="card shadow border-0 p-3 rounded-4">
-            
-            <div className="d-flex mb-3">
-              <input
-                type="text"
-                placeholder="Enter a task..."
-                className="form-control rounded-3 me-2"
-              />
-              <button className="btn btn-primary rounded-3 px-4">Add</button>
-            </div>
-
-            <ul className="list-group">
-              {sampleTasks.map((task) => (
-                <li
-                  key={task.id}
-                  className="list-group-item d-flex justify-content-between align-items-center rounded-3 mb-2"
-                  style={{
-                    border: "1px solid #E5E7EB",
-                    background: task.status
-                      ? "rgba(16, 185, 129, 0.15)"
-                      : "#ffffff",
-                  }}
-                >
-                  <div>
-                    <input
-                      type="checkbox"
-                      className="form-check-input me-2"
-                      checked={task.status}
-                      readOnly
-                    />
-                    <span
-                      style={{
-                        textDecoration: task.status ? "line-through" : "none",
-                        fontWeight: "500",
-                        color: "#374151",
-                      }}
-                    >
-                      {task.title}
-                    </span>
-                  </div>
-
-                  <div>
-                    <button className="btn btn-sm btn-outline-primary me-2">
-                      Edit
-                    </button>
-                    <button className="btn btn-sm btn-outline-danger">
-                      Delete
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
+    <div className="dashboard-bg">
+       {/* MAIN APP HEADING */}
+        <h1 className="main-heading">Welcome to ToDo App 🚀</h1>
+      <div className="dashboard-container">
+        
+        {/* Logout Button */}
+        {isLogin && (
+          <div className="logout-row">
+            <button className="btn logout-btn" onClick={logout}>
+              Logout
+            </button>
           </div>
+        )}
+
+       
+
+        {/* USER TASK TITLE */}
+        <h2 className="dashboard-title">
+          {user.username ? (
+            <>
+              <span className="dashboard-username">{user.username}</span>'s Tasks ✨
+            </>
+          ) : (
+            "My To-Do List ✨"
+          )}
+        </h2>
+
+        <div className="task-wrapper">
+          {!isLogin ? (
+            <div className="unauth-box">
+              <h3>Unauthorized ❌</h3>
+              <p>You need to login to view your tasks.</p>
+              <button className="btn login-btn" onClick={() => navigate("/loginpage")}>
+                Go to Login
+              </button>
+            </div>
+          ) : (
+            <>
+              {/* Add Task Input */}
+              <div className="add-task">
+                <input
+                  type="text"
+                  placeholder="Add a new task..."
+                  className="task-input"
+                  value={newTask}
+                  onChange={(e) => setNewTask(e.target.value)}
+                />
+                <button className="btn add-btn">Add</button>
+              </div>
+
+              {/* Task List Display */}
+              <ul className="task-list">
+                {sampleTasks.map((task) => (
+                  <li
+                    key={task.id}
+                    className={`task-item ${task.status ? "task-done" : ""}`}
+                  >
+                    <div className="task-left">
+                      <input type="checkbox" checked={task.status} readOnly />
+                      <span className={task.status ? "completed" : ""}>
+                        {task.title}
+                      </span>
+                    </div>
+
+                    <div className="task-right">
+                      <button className="btn small-btn edit-btn">Edit</button>
+                      <button className="btn small-btn delete-btn">Delete</button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
       </div>
     </div>

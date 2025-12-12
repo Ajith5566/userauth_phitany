@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import './loginform.css';
-import type { Lform, Lformerror } from '../types/form_type';
+import type { Lform, Lformerror, LoginResponse} from '../types/form_type';
+import { loginApi } from '../service/allApi';
+import { useNavigate } from 'react-router-dom';
+import type { AxiosResponse } from "axios";
+
 
 function Login_form() {
 
   // State for controlling password visibility (toggle show/hide)
   const [showPassword, setShowPassword] = useState(false);
-
+    const navigate = useNavigate();  //for navigation
   // State to store user login form data
   const [Data, setData] = useState<Lform>({
     email: "",
@@ -47,7 +51,7 @@ function Login_form() {
 
     // Password must be minimum 6 characters
     if (Data.password.trim().length < 6) {
-      newErrors.password = "Password must be at least 6 characters long";
+      newErrors.password = "Enter your Password";
     }
 
     // Update error state for displaying messages
@@ -62,25 +66,27 @@ function Login_form() {
    * Submit handler for form
    * Prevents refresh and validates first
    */
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
 
     // Stop execution if validation fails
     if (!validate()) return;
 
     console.log("Form Data Submitted:", Data);
+     const result = await loginApi(Data) as AxiosResponse<LoginResponse>;
 
-    // Clear form fields after success
-    setData({
-      email: "",
-      password: "",
-    });
+if (result.status === 200) {
+  sessionStorage.setItem("existingUser",JSON.stringify(result.data.existingUser));
+  sessionStorage.setItem("token",result.data.token)
+  alert("login success");
 
-    // Reset error messages
-    setErrors({
-      email: "",
-      password: "",
-    });
+  setData({ email: "", password: "" });
+  setErrors({ email: "", password: "" });
+
+  navigate("/dash");
+}
+
+    
   };
 
 

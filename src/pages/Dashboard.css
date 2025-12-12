@@ -1,0 +1,157 @@
+/* Background */
+.dashboard-bg {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #eef2ff, #fdf2f8);
+  padding: 40px 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Outer Container */
+.dashboard-container {
+  max-width: 650px;
+  margin: auto;
+  background: #ffffff;
+  padding: 25px 25px;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Title Section */
+.dashboard-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 30px;
+}
+
+.dashboard-username {
+  color: #6366f1;
+  font-weight: 800;
+}
+
+/* Logout */
+.logout-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.logout-btn {
+  background: #ef4444;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+/* Unauthorized Box */
+.unauth-box {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  padding: 25px;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.login-btn {
+  background: #3b82f6;
+  color: white;
+  margin-top: 10px;
+}
+
+/* Add Task */
+.add-task {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.task-input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+}
+
+.add-btn {
+  background: #6366f1;
+  color: white;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+}
+.add-btn:hover {
+  background: #4f46e5;
+}
+
+/* Task List */
+.task-list {
+  padding: 0;
+  list-style: none;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafafa;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  transition: 0.2s ease;
+}
+
+.task-item:hover {
+  background: #f1f5f9;
+}
+
+.task-done {
+  background: rgba(16, 185, 129, 0.15);
+}
+
+/* Task Left */
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.task-left span.completed {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+/* Task Right Buttons */
+.small-btn {
+  font-size: 0.8rem;
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+.edit-btn {
+  border: 1px solid #6366f1;
+  color: #6366f1;
+}
+.delete-btn {
+  border: 1px solid #ef4444;
+  color: #ef4444;
+}
+.delete-btn:hover {
+  background: #ef4444;
+  color: white;
+}
+.main-heading {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #4338ca;
+  margin-bottom: 5px;
+}
