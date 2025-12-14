@@ -12,3 +12,50 @@ export const registerApi =async (reqBody:unknown)=>{
 export const loginApi=async(reqBody:unknown)=>{
     return await commonApi('POST',`${BASE_URL}/user/login`,reqBody)
 }
+
+const getAuthHeader = () => {
+  const token = sessionStorage.getItem("token");
+  return {
+    Authorization: `Bearer ${token}`,
+  };
+};
+
+// ADD TODO
+export const addTodoApi = (task: string) => {
+  return commonApi(
+    "POST",
+    `${BASE_URL}/todo/add`,
+    { task },
+    getAuthHeader()
+  );
+};
+
+// GET TODOS
+export const getTodosApi = () => {
+  return commonApi(
+    "GET",
+    `${BASE_URL}/todo/all`,
+    undefined,
+    getAuthHeader()
+  );
+};
+
+// UPDATE TODO
+export const updateTodoApi = (id: string, data: any) => {
+  return commonApi(
+    "PUT",
+    `${BASE_URL}/todo/update/${id}`,
+    data,
+    getAuthHeader()
+  );
+};
+
+// DELETE TODO
+export const deleteTodoApi = (id: string) => {
+  return commonApi(
+    "DELETE",
+    `${BASE_URL}/todo/delete/${id}`,
+    undefined,
+    getAuthHeader()
+  );
+};
