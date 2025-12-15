@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Registration_form from '../components/Registration_form'
 import "./registration_page.css"
 
