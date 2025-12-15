@@ -1,0 +1,88 @@
+/* Navbar shell */
+.custom-navbar {
+  /* Remove default Bootstrap bg and color so we can fully customize */
+  background: linear-gradient(90deg, #111827 0%, #1f2937 45%, #4f46e5 100%);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+/* Brand text */
+.custom-navbar .navbar-brand {
+  color: #f9fafb;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.custom-navbar .navbar-brand:hover {
+  color: #e5e7eb;
+}
+
+/* Nav links */
+.custom-navbar .nav-link {
+  position: relative;
+  color: #e5e7eb;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  transition:
+    color 0.18s ease,
+    background-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.06s ease;
+}
+
+.custom-navbar .nav-link:hover {
+  color: #f9fafb;
+  background-color: rgba(15, 23, 42, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Active / primary pill */
+.custom-navbar .nav-link.active,
+.custom-navbar .nav-link.nav-pill.active {
+  color: #f9fafb;
+  background: radial-gradient(circle at 0% 0%, #a855f7, #4f46e5);
+  box-shadow:
+    0 8px 18px rgba(79, 70, 229, 0.45),
+    0 0 0 1px rgba(248, 250, 252, 0.14);
+}
+
+/* Non-active pill subtle border */
+.custom-navbar .nav-pill:not(.active) {
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+/* Toggler customizations */
+.custom-navbar .navbar-toggler {
+  box-shadow: none;
+}
+
+.custom-navbar .navbar-toggler-icon {
+  filter: invert(1) brightness(1.6);
+}
+
+/* Mobile adjustments */
+@media (max-width: 991.98px) {
+  .custom-navbar {
+    backdrop-filter: blur(18px);
+  }
+
+  .custom-navbar .navbar-collapse {
+    margin-top: 0.4rem;
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 12px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(31, 41, 55, 0.9);
+  }
+
+  .custom-navbar .nav-link {
+    width: 100%;
+    text-align: center;
+  }
+}

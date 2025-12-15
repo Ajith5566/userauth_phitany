@@ -124,7 +124,7 @@ function Dashboard() {
     setIsLogin(false);
 
     // Redirect to login page
-    navigate("/loginpage");
+    navigate("/");
   };
 
   // -----------------------------

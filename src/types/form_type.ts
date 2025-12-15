@@ -36,3 +36,8 @@ export interface LoginResponse {
   existingUser: User;
   token: string;
 }
+
+export interface UpdateTodoPayload {
+  task?: string;
+  status?: boolean;
+}

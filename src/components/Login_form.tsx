@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import './loginform.css';
-import type { Lform, Lformerror, LoginResponse} from '../types/form_type';
+import type { Lform, Lformerror, LoginResponse } from '../types/form_type';
 import { loginApi } from '../service/allApi';
 import { useNavigate } from 'react-router-dom';
 import type { AxiosResponse } from "axios";
-
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 function Login_form() {
 
   // State for controlling password visibility (toggle show/hide)
   const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate();  //for navigation
+  const navigate = useNavigate();  //for navigation
   // State to store user login form data
   const [Data, setData] = useState<Lform>({
     email: "",
@@ -28,7 +29,7 @@ function Login_form() {
     };
 
     setData(newData);   // Update form state
-    console.log(newData); // Debug updated values
+    //console.log(newData); // Debug updated values
   };
 
   // State to store validation error messages
@@ -66,29 +67,42 @@ function Login_form() {
    * Submit handler for form
    * Prevents refresh and validates first
    */
-  const handleSubmit = async(e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Stop execution if validation fails
+    // Stop if validation fails
     if (!validate()) return;
 
-    console.log("Form Data Submitted:", Data);
-     const result = await loginApi(Data) as AxiosResponse<LoginResponse>;
+    try {
+      const result = await loginApi(Data) as AxiosResponse<LoginResponse>;
 
-if (result.status === 200) {
-  sessionStorage.setItem("existingUser",JSON.stringify(result.data.existingUser));
-  sessionStorage.setItem("token",result.data.token)
-  alert("login success");
+      if (result.status === 200) {
+        // Store user data & token
+        sessionStorage.setItem(
+          "existingUser",
+          JSON.stringify(result.data.existingUser)
+        );
+        sessionStorage.setItem("token", result.data.token);
 
-  setData({ email: "", password: "" });
-  setErrors({ email: "", password: "" });
+        toast.success("Login successful 🎉");
 
-  navigate("/dash");
-}
+        // Reset form
+        setData({ email: "", password: "" });
+        setErrors({ email: "", password: "" });
 
-    
+        // Navigate to dashboard
+        navigate("/dash");
+      }
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        toast.error(
+          error.response?.data?.message || "Invalid email or password"
+        );
+      } else {
+        toast.error("Something went wrong");
+      }
+    }
   };
-
 
   return (
     <>

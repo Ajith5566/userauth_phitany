@@ -1,0 +1,90 @@
+/* Full screen background */
+.home-hero {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background-image:
+    radial-gradient(circle at top left, #4f46e5, transparent 55%),
+    radial-gradient(circle at bottom right, #ec4899, transparent 55%),
+    linear-gradient(135deg, #020617 0%, #0b1120 45%, #111827 100%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+}
+
+/* Glass card */
+.home-card {
+  text-align: center;
+  padding: 28px 26px 24px;
+  width: 440px;
+  max-width: 100%;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    0 22px 55px rgba(15, 23, 42, 0.95),
+    0 0 0 1px rgba(15, 23, 42, 0.85);
+  color: #f9fafb;
+}
+
+/* Heading & text */
+.home-title {
+  margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+.home-subtitle {
+  margin-bottom: 22px;
+  font-size: 15px;
+  color: #d1d5db;
+}
+
+/* Buttons */
+.home-btn-primary {
+  width: 100%;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  color: #f9fafb;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  box-shadow:
+    0 12px 30px rgba(79, 70, 229, 0.55),
+    0 0 0 1px rgba(248, 250, 252, 0.14);
+  margin-bottom: 10px;
+}
+
+.home-btn-outline {
+  width: 100%;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid rgba(209, 213, 219, 0.9);
+  background: transparent;
+  color: #f9fafb;
+}
+
+.home-footer-text {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #d1d5db;
+}
+
+/* Small screens */
+@media (max-width: 575.98px) {
+  .home-card {
+    padding: 22px 18px 20px;
+    border-radius: 18px;
+  }
+
+  .home-title {
+    font-size: 24px;
+  }
+}

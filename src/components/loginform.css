@@ -1,86 +1,146 @@
-
-/* Main card styling */
+/* Outer card */
 .login-card {
-  width: 390px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border-radius: 22px;
-  padding: 35px 30px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-}
-
-/* Title styling */
-.login-title {
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 8px;
-  color: #213555;
-}
-
-/* Subtitle small text */
-.login-subtitle {
-  text-align: center;
-  font-size: 14px;
-  color: #6d6d6d;
-  margin-bottom: 25px;
-}
-
-/* Nice input spacing */
-.login-input {
-  height: 45px;
-  border: 1px solid #c9d6ff;
-  transition: 0.2s;
-}
-
-/* Hover focus effect */
-.login-input:focus {
-  border-color: #6e8efb;
-  box-shadow: 0 0 6px rgba(110, 142, 251, 0.6);
-}
-
-/* Login button */
-.login-btn {
+  max-width: 420px;
   width: 100%;
-  background: linear-gradient(130deg, #6e8efb, #3f72ff);
-  border: none;
-  color: white;
-  padding: 12px;
-  border-radius: 10px;
-  font-size: 17px;
-  font-weight: 600;
-  margin-top: 10px;
-  transition: 0.25s;
+  margin: 40px auto;
+  padding: 28px 24px 24px;
+  border-radius: 22px;
+  background: rgba(15, 23, 42, 0.86);
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.92),
+    0 0 0 1px rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  color: #e5e7eb;
 }
 
-.login-btn:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 22px rgba(63, 114, 255, 0.55);
+/* Title + subtitle */
+.login-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #f9fafb;
+}
+
+.login-subtitle {
+  margin: 0 0 18px;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* Inputs */
+.login-input,
+.login-card .form-control {
+  background: rgba(15, 23, 42, 0.7);
+  border-radius: 11px;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  font-size: 14px;
+  color: #f9fafb;
+  padding: 9px 11px;
+  outline: none;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease,
+    transform 0.06s ease;
+}
+
+.login-card .form-control::placeholder {
+  color: #6b7280;
+}
+
+.login-card .form-control:focus {
+  background: rgba(15, 23, 42, 0.96);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.8),
+    0 0 0 10px rgba(79, 70, 229, 0.17);
+}
+
+/* Error message text (optional override for consistency) */
+.login-card p {
+  margin-bottom: 2px;
 }
 
 /* Forgot password link */
 .forgot-link {
   font-size: 13px;
+  color: #a5b4fc;
   text-decoration: none;
-  color: #3f72ff;
 }
 
 .forgot-link:hover {
   text-decoration: underline;
 }
 
-/* Signup text below */
-.signup-text {
-  text-align: center;
-  margin-top: 20px;
+/* Login button */
+.login-btn {
+  width: 100%;
+  border-radius: 999px;
+  padding: 10px 16px;
   font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: none;
+  color: #f9fafb;
+  background: linear-gradient(135deg, #4f46e5, #ec4899);
+  box-shadow:
+    0 12px 30px rgba(79, 70, 229, 0.4),
+    0 0 0 1px rgba(248, 250, 252, 0.08);
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.18s ease,
+    filter 0.16s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow:
+    0 16px 36px rgba(79, 70, 229, 0.5),
+    0 0 0 1px rgba(248, 250, 252, 0.12);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+  box-shadow:
+    0 10px 22px rgba(79, 70, 229, 0.3),
+    0 0 0 1px rgba(248, 250, 252, 0.08);
+}
+
+/* Bottom text */
+.signup-text {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #9ca3af;
+  text-align: center;
 }
 
 .signup-text a {
-  font-weight: 600;
+  color: #a5b4fc;
   text-decoration: none;
-  color: #3f72ff;
+  font-weight: 500;
 }
 
 .signup-text a:hover {
   text-decoration: underline;
+}
+
+/* Eye icon alignment if you want a shared style */
+.login-card .position-relative span {
+  color: #e5e7eb;
+}
+
+/* Responsive tweak */
+@media (max-width: 575.98px) {
+  .login-card {
+    margin: 24px 12px;
+    padding: 22px 18px 20px;
+    border-radius: 18px;
+  }
+
+  .login-title {
+    font-size: 22px;
+  }
 }

@@ -1,5 +1,6 @@
 
 
+import type { UpdateTodoPayload } from "../types/form_type"
 import { BASE_URL } from "./baseUrl"
 import { commonApi } from "./commonApi"
 
@@ -41,7 +42,7 @@ export const getTodosApi = () => {
 };
 
 // UPDATE TODO
-export const updateTodoApi = (id: string, data: any) => {
+export const updateTodoApi = (id: string, data:UpdateTodoPayload) => {
   return commonApi(
     "PUT",
     `${BASE_URL}/todo/update/${id}`,

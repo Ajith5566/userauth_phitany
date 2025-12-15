@@ -1,0 +1,72 @@
+/* Full-page background + centering */
+.login-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-image: radial-gradient(circle at top left, #4f46e5, transparent 55%),
+    radial-gradient(circle at bottom right, #ec4899, transparent 55%),
+    linear-gradient(135deg, #020617 0%, #0b1120 40%, #111827 100%);
+  /* Adjust gradient with a generator if you want a different palette */
+}
+
+/* Optional: outer shell around Login_form card (if you want extra glow) */
+.login-card-shell {
+  max-width: 440px;
+  width: 100%;
+  border-radius: 24px;
+  padding: 4px;
+  background: radial-gradient(circle at 0 0, rgba(129, 140, 248, 0.5), transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(248, 113, 113, 0.45), transparent 60%);
+  box-shadow:
+    0 22px 55px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Make sure nested card (from loginform.css) fits nicely */
+.login-card-shell .login-card {
+  margin: 0;
+  box-shadow: none;
+  width: 100%;
+}
+
+/* Small screens */
+@media (max-width: 575.98px) {
+  .login-page-wrapper {
+    padding: 16px;
+  }
+
+  .login-card-shell {
+    border-radius: 18px;
+  }
+}
+/* loginform.css */
+.login-card {
+  max-width: 480px;        /* was ~420px */
+  width: 100%;
+  margin: 60px auto;       /* a bit more vertical space */
+  padding: 34px 28px 30px; /* more inner padding */
+  border-radius: 24px;
+  /* keep the rest of your existing styles */
+}
+.login-title {
+  font-size: 26px;   /* was 24px */
+}
+
+.login-subtitle {
+  font-size: 15px;
+}
+
+.login-card .form-control,
+.login-input {
+  font-size: 15px;
+  padding: 11px 13px;   /* taller inputs */
+}
+
+.login-btn {
+  padding: 12px 18px;   /* taller button */
+  font-size: 15px;
+}

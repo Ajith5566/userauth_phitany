@@ -3,7 +3,7 @@ import './RegistrationForm.css'
 import type { FormData, FormErrors } from "../types/form_type";
 import { registerApi } from '../service/allApi';
 import { AxiosError } from "axios";
-
+import { toast } from "react-toastify";
 function Registration_form() {
 
     // State to toggle password visibility
@@ -29,7 +29,7 @@ function Registration_form() {
         };
 
         setData(newData);        // Update state
-        console.log(newData);    // Show updated values
+        //console.log(newData);    // Show updated values
     };
 
     // Error state for storing validation errors
@@ -78,164 +78,167 @@ function Registration_form() {
     };
 
     // On form submit
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
 
-  if (!validate()) return;
+        if (!validate()) return;
 
-  try {
-    const result = await registerApi(Data);
-    console.log(result);
-    
+        try {
+            const result = await registerApi(Data);
+            console.log(result);
 
-    alert("Registration successful!");
 
-    setData({
-      name: "",
-      mobile: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
+           toast.success("Registration completed successfully");
 
-    setErrors({
-      name: "",
-      mobile: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
+            setData({
+                name: "",
+                mobile: "",
+                email: "",
+                password: "",
+                confirmPassword: "",
+            });
 
-  } catch (error: unknown) {
-    if (error instanceof AxiosError) {
-      alert(error.response?.data?.message || "Something went wrong");
-    } else {
-      alert("Unknown error occurred");
-    }
-  }
-};
+            setErrors({
+                name: "",
+                mobile: "",
+                email: "",
+                password: "",
+                confirmPassword: "",
+            });
+
+        } catch (error: unknown) {
+            if (error instanceof AxiosError) {
+                toast.error(error.response?.data?.message || "Something went wrong");
+            } else {
+                alert("Unknown error occurred");
+            }
+        }
+    };
 
 
     return (
         <>
-            <h2 className="form-title">Create Account ✨</h2>
+            <div className="register-page">
+                <div className="register-overlay" />
+                <div className="register-card">
+                    <h2 className="form-title">Create Account ✨</h2>
+                    <p className="form-subtitle">
+                        Join the community and start your journey today.
+                    </p>
 
-            {/* Form Submit Handler */}
-            <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className="register-form">
+                        {/* Name */}
+                        <div className="form-group">
+                            <label htmlFor="name" className="form-label">
+                                Full Name
+                            </label>
+                            <input
+                                type="text"
+                                className={`form-input ${errors.name ? "input-error" : ""}`}
+                                id="name"
+                                value={Data.name}
+                                onChange={handleChange}
+                                placeholder="John Doe"
+                            />
+                            {errors.name && <p className="error-text">{errors.name}</p>}
+                        </div>
 
-                {/* Name Field */}
-                <div className="mb-3">
-                    <label htmlFor="exampleInputname" className="form-label">
-                        Full Name
-                    </label>
+                        {/* Mobile */}
+                        <div className="form-group">
+                            <label htmlFor="mobile" className="form-label">
+                                Mobile Number
+                            </label>
+                            <input
+                                type="tel"
+                                className={`form-input ${errors.mobile ? "input-error" : ""}`}
+                                id="mobile"
+                                value={Data.mobile}
+                                onChange={handleChange}
+                                placeholder="9876543210"
+                            />
+                            {errors.mobile && <p className="error-text">{errors.mobile}</p>}
+                        </div>
 
-                    {/* Controlled Input */}
-                    <input type="text" className="form-control rounded-3" id="name" value={Data.name} onChange={handleChange} />
+                        {/* Email */}
+                        <div className="form-group">
+                            <label htmlFor="email" className="form-label">
+                                Email Address
+                            </label>
+                            <input
+                                type="text"
+                                className={`form-input ${errors.email ? "input-error" : ""}`}
+                                id="email"
+                                value={Data.email}
+                                onChange={handleChange}
+                                placeholder="you@example.com"
+                            />
+                            {errors.email && <p className="error-text">{errors.email}</p>}
+                            <small className="helper-text">
+                                We'll never share your email ❤️
+                            </small>
+                        </div>
 
-                    {/* Error Message Display */}
-                    {errors.name && <p style={{ color: "red", fontSize: "12px" }}>{errors.name}</p>}
-                </div>
+                        {/* Password */}
+                        <div className="form-group password-group">
+                            <label htmlFor="password" className="form-label">
+                                Password
+                            </label>
+                            <div className="password-wrapper">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    className={`form-input ${errors.password ? "input-error" : ""}`}
+                                    id="password"
+                                    value={Data.password}
+                                    onChange={handleChange}
+                                    placeholder="••••••••"
+                                />
+                                <span
+                                    className="toggle-icon"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? "🔓" : "🔒"}
+                                </span>
+                            </div>
+                            {errors.password && <p className="error-text">{errors.password}</p>}
+                        </div>
 
-                {/* Mobile Number Field */}
-                <div className="mb-3">
-                    <label htmlFor="exampleInputnumber" className="form-label">
-                        Mobile Number
-                    </label>
+                        {/* Confirm Password */}
+                        <div className="form-group password-group">
+                            <label htmlFor="confirmPassword" className="form-label">
+                                Confirm Password
+                            </label>
+                            <div className="password-wrapper">
+                                <input
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    className={`form-input ${errors.confirmPassword ? "input-error" : ""
+                                        }`}
+                                    id="confirmPassword"
+                                    value={Data.confirmPassword}
+                                    onChange={handleChange}
+                                    placeholder="••••••••"
+                                />
+                                <span
+                                    className="toggle-icon"
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                >
+                                    {showConfirmPassword ? "🔓" : "🔒"}
+                                </span>
+                            </div>
+                            {errors.confirmPassword && (
+                                <p className="error-text">{errors.confirmPassword}</p>
+                            )}
+                        </div>
 
-                    <input type="tel" className="form-control rounded-3" id="mobile" value={Data.mobile} onChange={handleChange} />
+                        <button className="btn-primary-custom" type="submit">
+                            Register ✨
+                        </button>
 
-                    {errors.mobile && <p style={{ color: "red", fontSize: "12px" }}>{errors.mobile}</p>}
-                </div>
-
-                {/* Email Field */}
-                <div className="mb-3">
-                    <label className="form-label">
-                        Email Address
-                    </label>
-
-                    <input type="text" className="form-control rounded-3" id="email" value={Data.email} onChange={handleChange} />
-
-                    {errors.email && <p style={{ color: "red", fontSize: "12px" }}>{errors.email}</p>}
-
-                    <small className="text-secondary">
-                        We'll never share your email ❤️
-                    </small>
-                </div>
-
-                {/* Password Field */}
-                <div className="mb-3 position-relative">
-                    <label className="form-label">
-                        Password
-                    </label>
-
-                    <input
-                        type={showPassword ? "text" : "password"}
-                        className="form-control rounded-3"
-                        id="password"
-                        value={Data.password}
-                        onChange={handleChange}
-                    />
-
-                    {errors.password && (
-                        <p style={{ color: "red", fontSize: "12px" }}>
-                            {errors.password}
+                        <p className="form-footer-text">
+                            Already have an account? <span className="link-text"><a href='/loginpage'>Log in</a></span>
                         </p>
-                    )}
-
-                    {/* Eye Icon Toggle */}
-                    <span
-                        onClick={() => setShowPassword(!showPassword)}
-                        style={{
-                            position: "absolute",
-                            right: "10px",
-                            top: "38px",
-                            cursor: "pointer",
-                            fontSize: "14px",
-                        }}
-                    >
-                        {showPassword ? "🔓" : "🔒"}
-                    </span>
+                    </form>
                 </div>
-
-                {/* Confirm Password Field */}
-                <div className="mb-3 position-relative">
-                    <label className="form-label">
-                        Confirm Password
-                    </label>
-
-                    <input
-                        type={showConfirmPassword ? "text" : "password"}
-                        className="form-control rounded-3"
-                        id="confirmPassword"
-                        value={Data.confirmPassword}
-                        onChange={handleChange}
-                    />
-
-                    {errors.confirmPassword && (
-                        <p style={{ color: "red", fontSize: "12px" }}>
-                            {errors.confirmPassword}
-                        </p>
-                    )}
-
-                    <span
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        style={{
-                            position: "absolute",
-                            right: "10px",
-                            top: "38px",
-                            cursor: "pointer",
-                            fontSize: "14px",
-                        }}
-                    >
-                        {showConfirmPassword ? "🔓" : "🔒"}
-                    </span>
-                </div>
-
-                {/* Submit Button */}
-                <button className="btn-primary-custom" type='submit'>
-                    Register ✨
-                </button>
-            </form>
+            </div>
         </>
     )
 }
