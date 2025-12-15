@@ -3,6 +3,11 @@
 import type { UpdateTodoPayload } from "../types/form_type"
 import { BASE_URL } from "./baseUrl"
 import { commonApi } from "./commonApi"
+interface Todo {
+  _id: string;
+  task: string;
+  status: boolean;
+}
 
 //register a user
 export const registerApi =async (reqBody:unknown)=>{
@@ -33,13 +38,14 @@ export const addTodoApi = (task: string) => {
 
 // GET TODOS
 export const getTodosApi = () => {
-  return commonApi(
+  return commonApi<Todo[]>(
     "GET",
     `${BASE_URL}/todo/all`,
     undefined,
     getAuthHeader()
   );
 };
+
 
 // UPDATE TODO
 export const updateTodoApi = (id: string, data:UpdateTodoPayload) => {

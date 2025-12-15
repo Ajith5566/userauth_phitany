@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 
@@ -41,14 +41,14 @@ function Dashboard() {
   // -----------------------------
   // This function fetches todos for the logged-in user
   // Backend uses JWT to identify the user (req.userId)
-  const fetchTodos = async () => {
-    try {
-      const res = await getTodosApi();
-      setTodos(res.data);
-    } catch (err) {
-      console.error("Error fetching todos:", err);
-    }
-  };
+const fetchTodos = async () => {
+  try {
+    const res = await getTodosApi();
+    setTodos(res.data); // ✅ OK now
+  } catch (err) {
+    console.error("Error fetching todos:", err);
+  }
+};
 
   // -----------------------------
   // CHECK LOGIN ON PAGE LOAD
